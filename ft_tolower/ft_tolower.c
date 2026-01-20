@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 14:25:56 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 14:27:22 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-int	main(int argc, char **argv)
+int	ft_tolower(int c)
 {
-	char	dest[1024];
-	int		n;
-
-	if (argc < 3)
-		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
-	return (0);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }

@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/08 14:36:35 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/19 10:24:55 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-int	main(int argc, char **argv)
+int	ft_isalpha(int c)
 {
-	char	dest[1024];
-	int		n;
-
-	if (argc < 3)
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
 		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
+	}
 	return (0);
 }

@@ -5,26 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 14:57:10 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 15:11:37 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strrchr(const char *s, int c);
 
 int	main(int argc, char **argv)
 {
-	char	dest[1024];
-	int		n;
+	int	n;
 
 	if (argc < 3)
 		return (1);
 	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
+	printf("%s", ft_strrchr((const char *)argv[1], n));
 	return (0);
 }

@@ -5,26 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 14:27:26 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 14:27:40 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+int	ft_tolower(int c);
 
 int	main(int argc, char **argv)
 {
-	char	dest[1024];
-	int		n;
+	int	i;
 
-	if (argc < 3)
+	if (argc < 2)
 		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
+	i = 0;
+	while (argv[1][i])
+	{
+		printf("%d:%c => %d:%c\n", argv[1][i], argv[1][i],
+			ft_tolower(argv[1][i]), ft_tolower(argv[1][i]));
+		i++;
+	}
 	return (0);
 }

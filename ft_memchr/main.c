@@ -5,26 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 16:02:22 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 17:10:39 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	char	dest[1024];
-	int		n;
+	char	data[] = "Bonjour le monde !";
+	size_t	len;
+	char	char_to_find;
+	void	*result;
 
-	if (argc < 3)
-		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
+	len = strlen(data);
+	char_to_find = 'm';
+	// Recherche 'm' dans les 10 premiers octets
+	result = ft_memchr(data, char_to_find, 10);
+	if (result != NULL)
+	{
+		printf("Caractère '%c' trouvé à l'index : %ld\n", char_to_find,
+			(char *)result - data);
+	}
+	else
+	{
+		printf("Caractère '%c' non trouvé.\n", char_to_find);
+	}
 	return (0);
 }

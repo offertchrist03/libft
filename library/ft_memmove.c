@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/19 13:55:21 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-int	main(int argc, char **argv)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	dest[1024];
-	int		n;
+	unsigned char	buffer_temp;
+	unsigned char	*buffer_dest;
+	unsigned char	*buffer_src;
+	unsigned int	i;
 
-	if (argc < 3)
-		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
-	return (0);
+	buffer_dest = (unsigned char *)dest;
+	buffer_src = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		buffer_temp = buffer_src[i];
+		buffer_dest[i] = buffer_temp;
+		buffer_temp = 0;
+		i++;
+	}
+	return (dest);
 }

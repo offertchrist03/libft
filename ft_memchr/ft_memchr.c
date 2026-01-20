@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 15:53:59 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 16:02:19 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 17:08:24 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-int	main(int argc, char **argv)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char	dest[1024];
-	int		n;
+	unsigned char	*buff_s;
+	unsigned int	i;
 
-	if (argc < 3)
-		return (1);
-	n = atoi(argv[2]);
-	ft_memcpy(dest, argv[1], n);
-	printf("%s\n", dest);
-	return (0);
+	i = 0;
+	buff_s = (unsigned char *)s;
+	while (i < n && buff_s[i])
+	{
+		if ((int)buff_s[i] == c)
+			return ((void *)&s[i]);
+		i++;
+	}
+	return (NULL);
 }
