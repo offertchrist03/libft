@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernShop - Complete E-Commerce Solution</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- Custom Styles --- */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/seed/hero/1920/600.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Cards */
+        .product-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Cart */
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        /* Admin */
+        .admin-sidebar .nav-link {
+            color: #333;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .admin-sidebar .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Utilities */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1055;
+        }
+
+        footer {
+            margin-top: auto;
+            background: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home" onclick="router.navigate('home')">
+                <i class="fas fa-shopping-bag me-2"></i>ModernShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home" onclick="router.navigate('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#shop" onclick="router.navigate('shop')">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" onclick="router.navigate('about')">About</a>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <form class="d-flex me-3" onsubmit="app.handleSearch(event)">
+                    <div class="input-group">
+                        <input class="form-control" type="search" id="searchInput" placeholder="Search products..."
+                            aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+
+                <!-- Auth & Cart Icons -->
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item me-3">
+                        <a class="nav-link position-relative" href="#cart" onclick="router.navigate('cart')">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                id="cart-count">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" id="auth-dropdown">
+                        <!-- Content injected by JS based on auth state -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-container">
+        <!-- Views will be rendered here dynamically -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ModernShop</h5>
+                    <p>Your one-stop destination for premium products. Quality guaranteed.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white text-decoration-none"
+                                onclick="router.navigate('home')">Home</a></li>
+                        <li><a href="#shop" class="text-white text-decoration-none"
+                                onclick="router.navigate('shop')">Shop</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none"
+                                onclick="router.navigate('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 ModernShop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Modals (Generic Structure used by JS) -->
+    <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="genericModalContent">
+                <!-- Content Injected -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Main Application Logic -->
+    <script>
+        /**
+         * ------------------------------------------------------------------
+         * DATA STORE & SIMULATED BACKEND
+         * ------------------------------------------------------------------
+         */
+        const Store = {
+            getProducts: () => {
+                const data = localStorage.getItem('shop_products');
+                if (!data) {
+                    // Seed initial products
+                    const initialProducts = [
+                        { id: 1, name: "Wireless Headphones", price: 99.99, category: "Electronics", image: "https://picsum.photos/seed/ph1/300/300", rating: 4.5, description: "High quality wireless headphones with noise cancellation." },
+                        { id: 2, name: "Smart Watch", price: 149.50, category: "Electronics", image: "https://picsum.photos/seed/ph2/300/300", rating: 4.2, description: "Track your fitness and stay connected." },
+                        { id: 3, name: "Denim Jacket", price: 59.99, category: "Fashion", image: "https://picsum.photos/seed/ph3/300/300", rating: 4.0, description: "Stylish denim jacket for all seasons." },
+                        { id: 4, name: "Running Shoes", price: 89.00, category: "Fashion", image: "https://picsum.photos/seed/ph4/300/300", rating: 4.8, description: "Comfortable running shoes for daily use." },
+                        { id: 5, name: "Leather Bag", price: 120.00, category: "Accessories", image: "https://picsum.photos/seed/ph5/300/300", rating: 4.6, description: "Genuine leather bag with multiple compartments." },
+                        { id: 6, name: "Coffee Maker", price: 45.00, category: "Home", image: "https://picsum.photos/seed/ph6/300/300", rating: 4.3, description: "Brew fresh coffee every morning." },
+                        { id: 7, name: "Desk Lamp", price: 25.99, category: "Home", image: "https://picsum.photos/seed/ph7/300/300", rating: 4.1, description: "Modern LED desk lamp with adjustable brightness." },
+                        { id: 8, name: "Sunglasses", price: 35.00, category: "Accessories", image: "https://picsum.photos/seed/ph8/300/300", rating: 3.9, description: "UV protection sunglasses." },
+                    ];
+                    localStorage.setItem('shop_products', JSON.stringify(initialProducts));
+                    return initialProducts;
+                }
+                return JSON.parse(data);
+            },
+            saveProduct: (product) => {
+                const products = Store.getProducts();
+                if (product.id) {
+                    const index = products.findIndex(p => p.id == product.id);
+                    if (index !== -1) products[index] = product;
+                } else {
+                    product.id = Date.now();
+                    products.push(product);
+                }
+                localStorage.setItem('shop_products', JSON.stringify(products));
+            },
+            deleteProduct: (id) => {
+                let products = Store.getProducts();
+                products = products.filter(p => p.id != id);
+                localStorage.setItem('shop_products', JSON.stringify(products));
+            },
+            getUsers: () => {
+                const data = localStorage.getItem('shop_users');
+                if (!data) {
+                    const users = [
+                        { id: 1, name: "Admin User", email: "admin@shop.com", password: "admin123", role: "admin", orders: [] },
+                        { id: 2, name: "John Doe", email: "user@shop.com", password: "user123", role: "user", orders: [] }
+                    ];
+                    localStorage.setItem('shop_users', JSON.stringify(users));
+                    return users;
+                }
+                return JSON.parse(data);
+            },
+            saveUser: (user) => {
+                const users = Store.getUsers();
+                users.push(user);
+                localStorage.setItem('shop_users', JSON.stringify(users));
+            }
+        };
+
+        /**
+         * ------------------------------------------------------------------
+         * STATE MANAGEMENT
+         * ------------------------------------------------------------------
+         */
+        const State = {
+            currentUser: JSON.parse(localStorage.getItem('shop_currentUser')) || null,
+            cart: JSON.parse(localStorage.getItem('shop_cart')) || [],
+
+            addToCart: (productId, qty = 1) => {
+                const products = Store.getProducts();
+                const product = products.find(p => p.id == productId);
+                const existingItem = State.cart.find(item => item.id == productId);
+
+                if (existingItem) {
+                    existingItem.qty += qty;
+                } else {
+                    State.cart.push({ ...product, qty: qty });
+                }
+                State.saveCart();
+                app.showToast(`Added ${product.name} to cart`, 'success');
+            },
+
+            removeFromCart: (productId) => {
+                State.cart = State.cart.filter(item => item.id != productId);
+                State.saveCart();
+                router.navigate('cart'); // Re-render
+            },
+
+            updateCartQty: (productId, change) => {
+                const item = State.cart.find(item => item.id == productId);
+                if (item) {
+                    item.qty += change;
+                    if (item.qty <= 0) {
+                        State.removeFromCart(productId);
+                    } else {
+                        State.saveCart();
+                        router.navigate('cart');
+                    }
+                }
+            },
+
+            clearCart: () => {
+                State.cart = [];
+                State.saveCart();
+            },
+
+            saveCart: () => {
+                localStorage.setItem('shop_cart', JSON.stringify(State.cart));
+                app.updateCartCount();
+            },
+
+            login: (email, password) => {
+                const users = Store.getUsers();
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    State.currentUser = user;
+                    localStorage.setItem('shop_currentUser', JSON.stringify(user));
+                    app.updateAuthUI();
+                    return true;
+                }
+                return false;
+            },
+
+            logout: () => {
+                State.currentUser = null;
+                localStorage.removeItem('shop_currentUser');
+                app.updateAuthUI();
+                router.navigate('home');
+                app.showToast("Logged out successfully", "info");
+            },
+
+            placeOrder: (orderData) => {
+                // Update user order history
+                const users = Store.getUsers();
+                const userIdx = users.findIndex(u => u.id === State.currentUser.id);
+                if (userIdx !== -1) {
+                    const newOrder = {
+                        id: 'ORD-' + Date.now(),
+                        date: new Date().toISOString().split('T')[0],
+                        total: State.cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+                        items: [...State.cart],
+                        status: 'Processing',
+                        shipping: orderData
+                    };
+                    users[userIdx].orders.unshift(newOrder);
+                    localStorage.setItem('shop_users', JSON.stringify(users));
+
+                    // Update session user
+                    State.currentUser = users[userIdx];
+                    localStorage.setItem('shop_currentUser', JSON.stringify(State.currentUser));
+                }
+                State.clearCart();
+            }
+        };
+
+        /**
+         * ------------------------------------------------------------------
+         * APPLICATION LOGIC & UI HELPERS
+         * ------------------------------------------------------------------
+         */
+        const app = {
+            init: () => {
+                app.updateCartCount();
+                app.updateAuthUI();
+                window.addEventListener('hashchange', router.handleRoute);
+                router.handleRoute(); // Initial load
+            },
+
+            updateCartCount: () => {
+                const count = State.cart.reduce((sum, item) => sum + item.qty, 0);
+                document.getElementById('cart-count').textContent = count;
+            },
+
+            updateAuthUI: () => {
+                const container = document.getElementById('auth-dropdown');
+                if (State.currentUser) {
+                    const isAdmin = State.currentUser.role === 'admin';
+                    let adminLink = isAdmin ? `<li><a class="dropdown-item" href="#admin" onclick="router.navigate('admin')">Admin Panel</a></li>` : '';
+
+                    container.innerHTML = `
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i> ${State.currentUser.name}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#dashboard" onclick="router.navigate('dashboard')">Dashboard</a></li>
+                            ${adminLink}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="State.logout()">Logout</a></li>
+                        </ul>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <a class="nav-link" href="#login" onclick="router.navigate('login')">
+                            <i class="fas fa-user me-1"></i> Login
+                        </a>
+                    `;
+                }
+            },
+
+            showToast: (message, type = 'info') => {
+                const container = document.getElementById('toast-container');
+                const bgClass = type === 'success' ? 'bg-success' : (type === 'error' ? 'bg-danger' : 'bg-primary');
+                const id = 'toast-' + Date.now();
+
+                const html = `
+                    <div id="${id}" class="toast align-items-center text-white ${bgClass} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                ${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                `;
+
+                container.insertAdjacentHTML('beforeend', html);
+                const toastEl = document.getElementById(id);
+                const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                toast.show();
+
+                toastEl.addEventListener('hidden.bs.toast', () => {
+                    toastEl.remove();
+                });
+            },
+
+            handleSearch: (e) => {
+                e.preventDefault();
+                const query = document.getElementById('searchInput').value;
+                router.navigate('shop', { search: query });
+            },
+
+            renderStars: (rating) => {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= rating) stars += '<i class="fas fa-star text-warning"></i>';
+                    else if (i - 0.5 <= rating) stars += '<i class="fas fa-star-half-alt text-warning"></i>';
+                    else stars += '<i class="far fa-star text-warning"></i>';
+                }
+                return stars;
+            }
+        };
+
+        /**
+         * ------------------------------------------------------------------
+         * ROUTER & VIEW RENDERERS
+         * ------------------------------------------------------------------
+         */
+        const router = {
+            navigate: (route, params = {}) => {
+                let hash = '#' + route;
+                if (params.search) hash += '?search=' + encodeURIComponent(params.search);
+                window.location.hash = hash;
+            },
+
+            handleRoute: () => {
+                const hash = window.location.hash.slice(1) || 'home';
+                const [route, queryString] = hash.split('?');
+                const params = new URLSearchParams(queryString || '');
+                const container = document.getElementById('app-container');
+
+                window.scrollTo(0, 0);
+
+                switch (route) {
+                    case 'home': Views.renderHome(container); break;
+                    case 'shop': Views.renderShop(container, params.get('search'), params.get('category')); break;
+                    case 'product': Views.renderProductDetails(container, params.get('id')); break;
+                    case 'cart': Views.renderCart(container); break;
+                    case 'checkout': Views.renderCheckout(container); break;
+                    case 'login': Views.renderLogin(container); break;
+                    case 'register': Views.renderRegister(container); break;
+                    case 'dashboard': Views.renderDashboard(container); break;
+                    case 'admin': Views.renderAdmin(container); break;
+                    default: Views.renderHome(container);
+                }
+            }
+        };
+
+        const Views = {
+            renderHome: (container) => {
+                const products = Store.getProducts().slice(0, 4); // Featured products
+
+                let productsHtml = products.map(p => Components.productCard(p)).join('');
+
+                container.innerHTML = `
+                    <div class="hero-section">
+                        <div class="container">
+                            <h1 class="display-4 fw-bold">Summer Collection 2023</h1>
+                            <p class="lead">Get the best deals on the latest trends.</p>
+                            <button class="btn btn-primary btn-lg" onclick="router.navigate('shop')">Shop Now</button>
+                        </div>
+                    </div>
+
+                    <div class="container mb-5">
+                        <div class="row mb-4 text-center">
+                            <div class="col-12"><h2 class="section-title">Featured Categories</h2></div>
+                        </div>
+                        <div class="row text-center mb-5">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100 shadow-sm border-0 cursor-pointer" onclick="router.navigate('shop', 'category=Electronics')">
+                                    <img src="https://picsum.photos/seed/cat1/200/150" class="card-img-top" alt="Electronics">
+                                    <div class="card-body"><h5>Electronics</h5></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100 shadow-sm border-0 cursor-pointer" onclick="router.navigate('shop', 'category=Fashion')">
+                                    <img src="https://picsum.photos/seed/cat2/200/150" class="card-img-top" alt="Fashion">
+                                    <div class="card-body"><h5>Fashion</h5></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100 shadow-sm border-0 cursor-pointer" onclick="router.navigate('shop', 'category=Home')">
+                                    <img src="https://picsum.photos/seed/cat3/200/150" class="card-img-top" alt="Home">
+                                    <div class="card-body"><h5>Home</h5></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="card h-100 shadow-sm border-0 cursor-pointer" onclick="router.navigate('shop', 'category=Accessories')">
+                                    <img src="https://picsum.photos/seed/cat4/200/150" class="card-img-top" alt="Accessories">
+                                    <div class="card-body"><h5>Accessories</h5></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-12 text-center"><h2 class="section-title">Featured Products</h2></div>
+                        </div>
+                        <div class="row">
+                            ${productsHtml}
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderShop: (container, search = '', category = '') => {
+                let products = Store.getProducts();
+
+                // Filtering
+                if (category) products = products.filter(p => p.category === category);
+                if (search) products = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
+
+                let productsHtml = products.length
+                    ? products.map(p => Components.productCard(p)).join('')
+                    : '<div class="col-12 text-center py-5"><h4>No products found.</h4></div>';
+
+                const allProducts = Store.getProducts();
+                const categories = [...new Set(allProducts.map(p => p.category))];
+
+                container.innerHTML = `
+                    <div class="container my-4">
+                        <div class="row">
+                            <!-- Sidebar -->
+                            <div class="col-md-3 mb-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Categories</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><a href="#" onclick="router.navigate('shop')" class="text-decoration-none text-dark ${!category ? 'fw-bold' : ''}">All Categories</a></li>
+                                            ${categories.map(c => `
+                                                <li class="mb-2">
+                                                    <a href="#shop?category=${c}" onclick="router.navigate('shop', 'category=${c}')" class="text-decoration-none text-dark ${category === c ? 'fw-bold text-primary' : ''}">${c}</a>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product Grid -->
+                            <div class="col-md-9">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4>${category ? category : 'All Products'} ${search ? `(Search: ${search})` : ''}</h4>
+                                    <select class="form-select w-auto" onchange="app.handleSort(this.value)">
+                                        <option value="default">Sort by</option>
+                                        <option value="low">Price: Low to High</option>
+                                        <option value="high">Price: High to Low</option>
+                                    </select>
+                                </div>
+                                <div class="row" id="shop-grid">
+                                    ${productsHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderProductDetails: (container, id) => {
+                const product = Store.getProducts().find(p => p.id == id);
+                if (!product) return router.navigate('shop');
+
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" onclick="router.navigate('home')">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#" onclick="router.navigate('shop')">Shop</a></li>
+                                <li class="breadcrumb-item active">${product.name}</li>
+                            </ol>
+                        </nav>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <img src="${product.image}" class="img-fluid rounded shadow-sm" alt="${product.name}">
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="fw-bold mb-3">${product.name}</h2>
+                                <div class="mb-3">${app.renderStars(product.rating)} <span class="text-muted ms-2">(${product.rating} Reviews)</span></div>
+                                <h3 class="text-primary mb-4">$${product.price.toFixed(2)}</h3>
+                                <p class="lead mb-4">${product.description}</p>
+                                
+                                <div class="d-flex align-items-center gap-3 mb-4">
+                                    <div class="input-group" style="width: 150px;">
+                                        <button class="btn btn-outline-secondary" onclick="document.getElementById('p-qty').value = Math.max(1, parseInt(document.getElementById('p-qty').value)-1)">-</button>
+                                        <input type="number" class="form-control text-center" id="p-qty" value="1" min="1">
+                                        <button class="btn btn-outline-secondary" onclick="document.getElementById('p-qty').value = parseInt(document.getElementById('p-qty').value)+1">+</button>
+                                    </div>
+                                    <button class="btn btn-primary btn-lg flex-grow-1" onclick="State.addToCart(${product.id}, parseInt(document.getElementById('p-qty').value))">Add to Cart</button>
+                                </div>
+                                
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <p><i class="fas fa-truck me-2"></i> Free shipping on orders over $100</p>
+                                        <p><i class="fas fa-undo me-2"></i> 30-day return policy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reviews Section -->
+                        <div class="mt-5">
+                            <h3 class="mb-4">Customer Reviews</h3>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Jane Doe</h5>
+                                    <div class="mb-2">${app.renderStars(5)}</div>
+                                    <p class="card-text">Great product! Exactly as described.</p>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mark Smith</h5>
+                                    <div class="mb-2">${app.renderStars(4)}</div>
+                                    <p class="card-text">Good quality, but delivery took a bit longer than expected.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-header">Write a Review</div>
+                                <div class="card-body">
+                                    <form onsubmit="event.preventDefault(); app.showToast('Review submitted for moderation', 'success')">
+                                        <div class="mb-3">
+                                            <label class="form-label">Rating</label>
+                                            <select class="form-select">
+                                                <option>5 Stars</option>
+                                                <option>4 Stars</option>
+                                                <option>3 Stars</option>
+                                                <option>2 Stars</option>
+                                                <option>1 Star</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Comment</label>
+                                            <textarea class="form-control" rows="3" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderCart: (container) => {
+                const subtotal = State.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                const tax = subtotal * 0.08;
+                const total = subtotal + tax;
+
+                let cartItemsHtml = State.cart.length ? State.cart.map(item => `
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="${item.image}" class="cart-item-img me-3" alt="${item.name}">
+                                <div>
+                                    <h6 class="mb-0"><a href="#product?id=${item.id}" onclick="router.navigate('product', 'id=${item.id}')" class="text-decoration-none text-dark">${item.name}</a></h6>
+                                    <small class="text-muted">${item.category}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>$${item.price.toFixed(2)}</td>
+                        <td>
+                            <div class="input-group input-group-sm" style="width: 100px;">
+                                <button class="btn btn-outline-secondary" onclick="State.updateCartQty(${item.id}, -1)">-</button>
+                                <input type="text" class="form-control text-center bg-white" value="${item.qty}" readonly>
+                                <button class="btn btn-outline-secondary" onclick="State.updateCartQty(${item.id}, 1)">+</button>
+                            </div>
+                        </td>
+                        <td>$${(item.price * item.qty).toFixed(2)}</td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="State.removeFromCart(${item.id})"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `).join('') : `<tr><td colspan="5" class="text-center py-4">Your cart is empty. <a href="#shop" onclick="router.navigate('shop')">Start Shopping</a></td></tr>`;
+
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <h2 class="mb-4">Shopping Cart</h2>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card shadow-sm">
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table align-middle mb-0">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${cartItemsHtml}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">Order Summary</div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Subtotal</span>
+                                            <span>$${subtotal.toFixed(2)}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Tax (8%)</span>
+                                            <span>$${tax.toFixed(2)}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between mb-4 fw-bold">
+                                            <span>Total</span>
+                                            <span>$${total.toFixed(2)}</span>
+                                        </div>
+                                        <button class="btn btn-success w-100 mb-2" ${State.cart.length === 0 ? 'disabled' : ''} onclick="router.navigate('checkout')">Proceed to Checkout</button>
+                                        <button class="btn btn-outline-secondary w-100" onclick="router.navigate('shop')">Continue Shopping</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderCheckout: (container) => {
+                if (!State.currentUser) {
+                    app.showToast("Please login to checkout", "error");
+                    return router.navigate('login');
+                }
+                if (State.cart.length === 0) return router.navigate('cart');
+
+                const total = State.cart.reduce((sum, item) => sum + (item.price * item.qty), 0) * 1.08;
+
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <h2 class="mb-4">Checkout</h2>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form id="checkoutForm" onsubmit="event.preventDefault(); app.processCheckout()">
+                                    <h4 class="mb-3">Billing Details</h4>
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" required value="${State.currentUser.name.split(' ')[0]}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" required value="${State.currentUser.name.split(' ')[1] || ''}">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Address</label>
+                                            <input type="text" class="form-control" required placeholder="1234 Main St">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">City</label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">State</label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Zip</label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="mb-3">Payment</h4>
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" id="credit" checked>
+                                                <label class="form-check-label" for="credit">Credit Card</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" id="paypal">
+                                                <label class="form-check-label" for="paypal">PayPal</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" id="cod">
+                                                <label class="form-check-label" for="cod">Cash on Delivery</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">Place Order</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-header">Your Order</div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush mb-3">
+                                            ${State.cart.map(item => `
+                                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                                    <div>
+                                                        <h6 class="my-0">${item.name} x ${item.qty}</h6>
+                                                        <small class="text-muted">${item.category}</small>
+                                                    </div>
+                                                    <span class="text-muted">$${(item.price * item.qty).toFixed(2)}</span>
+                                                </li>
+                                            `).join('')}
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>Total (USD)</span>
+                                                <strong>$${total.toFixed(2)}</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderLogin: (container) => {
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5">
+                                <div class="card shadow">
+                                    <div class="card-body p-4">
+                                        <h3 class="text-center mb-4">Login</h3>
+                                        <form onsubmit="event.preventDefault(); app.handleLoginSubmit()">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" id="loginEmail" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" id="loginPass" class="form-control" required>
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="app.togglePass('loginPass')"><i class="fas fa-eye"></i></button>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                                            <div class="text-center">
+                                                <a href="#forgot" class="text-decoration-none">Forgot Password?</a>
+                                            </div>
+                                            <hr>
+                                            <div class="text-center">
+                                                <p>Don't have an account? <a href="#register" onclick="router.navigate('register')" class="text-decoration-none">Register</a></p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderRegister: (container) => {
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5">
+                                <div class="card shadow">
+                                    <div class="card-body p-4">
+                                        <h3 class="text-center mb-4">Register</h3>
+                                        <form onsubmit="event.preventDefault(); app.handleRegisterSubmit()">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" id="regName" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" id="regEmail" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone Number</label>
+                                                <input type="tel" id="regPhone" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Password</label>
+                                                <input type="password" id="regPass" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Confirm Password</label>
+                                                <input type="password" id="regConfirmPass" class="form-control" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-success w-100 mb-3">Register</button>
+                                            <div class="text-center">
+                                                <p>Already have an account? <a href="#login" onclick="router.navigate('login')" class="text-decoration-none">Login</a></p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderDashboard: (container) => {
+                if (!State.currentUser) return router.navigate('login');
+
+                const ordersHtml = State.currentUser.orders && State.currentUser.orders.length ?
+                    State.currentUser.orders.map(o => `
+                        <tr>
+                            <td>${o.id}</td>
+                            <td>${o.date}</td>
+                            <td>$${o.total.toFixed(2)}</td>
+                            <td><span class="badge bg-${o.status === 'Processing' ? 'warning' : 'success'}">${o.status}</span></td>
+                            <td>${o.items.length} items</td>
+                        </tr>
+                    `).join('') : '<tr><td colspan="5" class="text-center">No orders found.</td></tr>';
+
+                container.innerHTML = `
+                    <div class="container my-5">
+                        <h2 class="mb-4">My Dashboard</h2>
+                        <div class="row">
+                            <div class="col-md-3 mb-4">
+                                <div class="list-group shadow-sm">
+                                    <a href="#" class="list-group-item list-group-item-action active">Profile Info</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Order History</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Addresses</a>
+                                    <a href="#" onclick="State.logout()" class="list-group-item list-group-item-action text-danger">Logout</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header">Profile Information</div>
+                                    <div class="card-body">
+                                        <p><strong>Name:</strong> ${State.currentUser.name}</p>
+                                        <p><strong>Email:</strong> ${State.currentUser.email}</p>
+                                        <p><strong>Role:</strong> ${State.currentUser.role}</p>
+                                        <button class="btn btn-sm btn-primary">Edit Profile</button>
+                                    </div>
+                                </div>
+                                <div class="card shadow-sm">
+                                    <div class="card-header">Order History</div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Order ID</th>
+                                                        <th>Date</th>
+                                                        <th>Total</th>
+                                                        <th>Status</th>
+                                                        <th>Items</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${ordersHtml}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderAdmin: (container) => {
+                if (!State.currentUser || State.currentUser.role !== 'admin') {
+                    app.showToast("Access Denied", "error");
+                    return router.navigate('home');
+                }
+
+                const products = Store.getProducts();
+                const productRows = products.map(p => `
+                    <tr>
+                        <td>${p.id}</td>
+                        <td><img src="${p.image}" width="40" height="40" class="object-fit-cover rounded"></td>
+                        <td>${p.name}</td>
+                        <td>${p.category}</td>
+                        <td>$${p.price}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info text-white" onclick="app.adminEditProduct(${p.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger" onclick="app.adminDeleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+
+                container.innerHTML = `
+                    <div class="container-fluid my-5">
+                        <h2 class="mb-4">Admin Dashboard</h2>
+                        <div class="row">
+                            <div class="col-md-2 mb-4">
+                                <div class="nav flex-column nav-pills admin-sidebar shadow-sm p-2" role="tablist">
+                                    <a class="nav-link active" href="#">Manage Products</a>
+                                    <a class="nav-link" href="#">Manage Orders</a>
+                                    <a class="nav-link" href="#">Manage Users</a>
+                                    <a class="nav-link" href="#">Settings</a>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card shadow-sm">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Products</h5>
+                                        <button class="btn btn-primary btn-sm" onclick="app.openProductModal()">Add New Product</button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Image</th>
+                                                        <th>Name</th>
+                                                        <th>Category</th>
+                                                        <th>Price</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${productRows}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        const Components = {
+            productCard: (product) => `
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card product-card shadow-sm h-100">
+                        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text text-muted small">${product.category}</p>
+                            <div class="mb-2">${app.renderStars(product.rating)}</div>
+                            <div class="mt-auto d-flex justify-content-between align-items-center">
+                                <span class="price-tag">$${product.price.toFixed(2)}</span>
+                                <button class="btn btn-sm btn-outline-primary" onclick="State.addToCart(${product.id})">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </div>
+                            <a href="#product?id=${product.id}" onclick="router.navigate('product', 'id=${product.id}')" class="btn btn-sm btn-link mt-2 text-decoration-none">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        /**
+         * ------------------------------------------------------------------
+         * EVENT HANDLERS & HELPERS
+         * ------------------------------------------------------------------
+         */
+        app.togglePass = (id) => {
+            const el = document.getElementById(id);
+            el.type = el.type === 'password' ? 'text' : 'password';
+        };
+
+        app.handleLoginSubmit = () => {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            if (State.login(email, pass)) {
+                app.showToast("Login Successful", "success");
+                router.navigate('home');
+            } else {
+                app.showToast("Invalid Email or Password", "error");
+            }
+        };
+
+        app.handleRegisterSubmit = () => {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const pass = document.getElementById('regPass').value;
+            const confirm = document.getElementById('regConfirmPass').value;
+
+            if (pass !== confirm) {
+                return app.showToast("Passwords do not match", "error");
+            }
+
+            const users = Store.getUsers();
+            if (users.find(u => u.email === email)) {
+                return app.showToast("Email already registered", "error");
+            }
+
+            const newUser = { id: Date.now(), name, email, password: pass, phone, role: 'user', orders: [] };
+            Store.saveUser(newUser);
+            app.showToast("Registration Successful! Please login.", "success");
+            router.navigate('login');
+        };
+
+        app.processCheckout = () => {
+            // Basic form validation simulation
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Simulate processing
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                State.placeOrder({ method: 'Credit Card' }); // simplified
+                app.showToast("Order placed successfully!", "success");
+                router.navigate('dashboard');
+            }, 1500);
+        };
+
+        // Admin Functions
+        app.adminDeleteProduct = (id) => {
+            if (confirm("Are you sure you want to delete this product?")) {
+                Store.deleteProduct(id);
+                router.navigate('admin');
+                app.showToast("Product deleted", "success");
+            }
+        };
+
+        app.openProductModal = (product = null) => {
+            const modalEl = document.getElementById('genericModal');
+            const content = document.getElementById('genericModalContent');
+            const isEdit = !!product;
+
+            content.innerHTML = `
+                <div class="modal-header">
+                    <h5 class="modal-title">${isEdit ? 'Edit Product' : 'Add New Product'}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminProductForm">
+                        <div class="mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="pName" value="${product ? product.name : ''}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" id="pCat">
+                                <option ${product && product.category === 'Electronics' ? 'selected' : ''}>Electronics</option>
+                                <option ${product && product.category === 'Fashion' ? 'selected' : ''}>Fashion</option>
+                                <option ${product && product.category === 'Home' ? 'selected' : ''}>Home</option>
+                                <option ${product && product.category === 'Accessories' ? 'selected' : ''}>Accessories</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="number" step="0.01" class="form-control" id="pPrice" value="${product ? product.price : ''}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image URL (use picsum for demo)</label>
+                            <input type="text" class="form-control" id="pImage" value="${product ? product.image : `https://picsum.photos/seed/${Date.now()}/300/300`}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="pDesc" rows="3" required>${product ? product.description : ''}</textarea>
+                        </div>
+                        <input type="hidden" id="pId" value="${product ? product.id : ''}">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="app.saveProductFromModal()">Save Product</button>
+                </div>
+            `;
+
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+        };
+
+        app.adminEditProduct = (id) => {
+            const product = Store.getProducts().find(p => p.id == id);
+            if (product) app.openProductModal(product);
+        };
+
+        app.saveProductFromModal = () => {
+            const id = document.getElementById('pId').value;
+            const name = document.getElementById('pName').value;
+            const category = document.getElementById('pCat').value;
+            const price = parseFloat(document.getElementById('pPrice').value);
+            const image = document.getElementById('pImage').value;
+            const description = document.getElementById('pDesc').value;
+
+            const product = {
+                id: id ? parseInt(id) : null,
+                name, category, price, image, description,
+                rating: id ? Store.getProducts().find(p => p.id == id).rating : 0
+            };
+
+            Store.saveProduct(product);
+
+            // Close Modal
+            const modalEl = document.getElementById('genericModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+
+            app.showToast("Product saved successfully", "success");
+            router.navigate('admin');
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', app.init);
+
+    </script>
+</body>
+
+</html>
