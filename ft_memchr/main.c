@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:02:22 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:10:39 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/21 09:13:17 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(void)
 
 	len = strlen(data);
 	char_to_find = 'm';
-	// Recherche 'm' dans les 10 premiers octets
 	result = ft_memchr(data, char_to_find, 10);
 	if (result != NULL)
 	{
