@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/21 09:15:20 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/21 09:39:24 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdlib.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_calloc(size_t number, size_t size)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
-	unsigned int	i;
+	size_t	i;
+	char	*ptr;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
-	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	ptr = (char *)malloc(size * number);
+	if (!ptr)
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
+		free(ptr);
+		return (NULL);
+	}
+	i = 0;
+	while (i < number)
+	{
+		ptr[i] = '\0';
 		i++;
 	}
-	return (dest);
+	return ((void *)ptr);
 }

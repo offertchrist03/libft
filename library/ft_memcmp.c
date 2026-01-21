@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 17:23:02 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/21 08:32:50 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
+	unsigned char	*buff_s1;
+	unsigned char	*buff_s2;
 	unsigned int	i;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
 	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	buff_s1 = (unsigned char *)s1;
+	buff_s2 = (unsigned char *)s2;
+	while (i < n && (buff_s1[i] || buff_s2[i]))
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
+		if (!(buff_s1[i] == buff_s2[i]))
+			return ((int)buff_s1[i] - (int)buff_s2[i]);
 		i++;
 	}
-	return (dest);
+	return (0);
 }

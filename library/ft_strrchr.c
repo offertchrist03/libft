@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 17:38:02 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 17:38:02 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strrchr(const char *s, int c)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
-	unsigned int	i;
+	int	s_len;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
-	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	s_len = 0;
+	while (s[s_len])
+		s_len++;
+	while (s_len > 0)
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
-		i++;
+		s_len--;
+		if ((int)s[s_len] == c)
+			return ((char *)&s[s_len]);
 	}
-	return (dest);
+	return (NULL);
 }

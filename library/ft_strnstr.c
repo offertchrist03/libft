@@ -1,38 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:54:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 16:13:13 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/21 08:37:14 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/21 08:57:18 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+static size_t	ft_strlen(char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;
-	unsigned int	dst_len;
-	unsigned int	src_len;
 
-	dst_len = 0;
-	while (dst[dst_len])
-		dst_len++;
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	i = dst_len;
-	j = 0;
-	while (src[j] && i < size)
+	i = 0;
+	if (!little)
+		return ((char *)big);
+	while (i < len && big[i])
 	{
-		dst[i] = src[j];
-		j++;
+		j = 0;
+		if (big[i] == little[j])
+		{
+			while (j < ft_strlen((char *)little))
+			{
+				if (big[i + j] == little[j])
+					j++;
+				break ;
+			}
+			if (j == ft_strlen((char *)little))
+				return ((char *)&big[i]);
+		}
 		i++;
 	}
-	dst[i] = '\0';
-	return (src_len + dst_len);
+	return (NULL);
 }

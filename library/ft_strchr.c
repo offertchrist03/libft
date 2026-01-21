@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/20 14:31:49 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/20 17:37:37 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strchr(const char *s, int c)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
-	unsigned int	i;
+	int	i;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
 	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	while (s[i])
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
+		if ((int)s[i] == c)
+			return ((char *)&s[i]);
 		i++;
 	}
-	return (dest);
+	return (NULL);
 }

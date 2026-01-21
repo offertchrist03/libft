@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/21 09:42:42 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/21 09:50:22 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdlib.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+static size_t	ft_strlen(char *s)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
 	unsigned int	i;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
 	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *str)
+{
+	char	*buffer;
+	int		i;
+
+	buffer = (char *)malloc(ft_strlen((char *)str) * sizeof(char));
+	if (!buffer)
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
+		free(buffer);
+		return (NULL);
+	}
+	i = 0;
+	while (str[i])
+	{
+		buffer[i] = str[i];
 		i++;
 	}
-	return (dest);
+	buffer[i] = '\0';
+	return (buffer);
 }
