@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:02:19 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:08:24 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/23 02:41:37 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*buff_s;
-	unsigned int	i;
+	char	*buff_s;
+	size_t	i;
 
+	if (c >= 256)
+		c -= 256;
 	i = 0;
-	buff_s = (unsigned char *)s;
-	while (i < n && buff_s[i])
+	buff_s = (char *)s;
+	while (i < n)
 	{
-		if ((int)buff_s[i] == c)
+		if (buff_s[i] == c)
 			return ((void *)&s[i]);
 		i++;
 	}

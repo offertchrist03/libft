@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 08:59:04 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/21 09:11:58 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/23 04:34:01 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-	{
-		return (1);
-	}
-	return (0);
-}
+#include "libft.h"
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int			i;
+	int			sign;
+	long int	result;
 
 	i = 0;
 	sign = 1;
+	result = 0;
+	while (nptr[i] == ' ' || nptr[i] == 9 || nptr[i] == 10 || nptr[i] == 11
+		|| nptr[i] == 12 || nptr[i] == 13 || nptr[i] == 0)
+		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
@@ -35,7 +32,7 @@ int	ft_atoi(const char *nptr)
 	}
 	while (nptr[i] && ft_isdigit(nptr[i]))
 	{
-		result = (result * 10) + ((char)nptr[i] - '0');
+		result = (result * 10) + ((const char)nptr[i] - '0');
 		i++;
 	}
 	return (result * sign);

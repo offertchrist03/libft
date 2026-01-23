@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/20 17:39:38 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/23 02:33:10 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	buffer_temp;
-	unsigned char	*buffer_dest;
-	unsigned char	*buffer_src;
-	unsigned int	i;
+	char	*buffer_dest;
+	char	*buffer_src;
+	size_t	i;
 
-	buffer_dest = (unsigned char *)dest;
-	buffer_src = (unsigned char *)src;
-	i = 0;
-	while (i < n && (buffer_dest[i] || buffer_src[i]))
+	buffer_dest = (char *)dest;
+	buffer_src = (char *)src;
+	if (buffer_src <= buffer_dest)
 	{
-		buffer_temp = buffer_src[i];
-		buffer_dest[i] = buffer_temp;
-		buffer_temp = 0;
-		i++;
+		while (n > 0)
+		{
+			n--;
+			buffer_dest[n] = buffer_src[n];
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < n)
+		{
+			buffer_dest[i] = buffer_src[i];
+			i++;
+		}
 	}
 	return (dest);
 }
