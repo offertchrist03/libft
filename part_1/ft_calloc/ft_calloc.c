@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mahendri <mahendri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 09:15:20 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/21 09:39:24 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:15:13 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 void	*ft_calloc(size_t number, size_t size)
 {
 	size_t	i;
-	char	*ptr;
+	char	*buffer;
 
-	ptr = (char *)malloc(size * number);
-	if (!ptr)
+	buffer = (char *)malloc(number * size);
+	if (!buffer)
 	{
-		free(ptr);
+		free(buffer);
 		return (NULL);
 	}
 	i = 0;
 	while (i < number)
 	{
-		ptr[i] = '\0';
+		buffer[i] = '\0';
 		i++;
 	}
-	return ((void *)ptr);
+	return ((void *)buffer);
 }
