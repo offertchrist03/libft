@@ -1,49 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 09:15:20 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/24 10:06:32 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/24 09:33:45 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/24 10:21:04 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdlib.h>
 
-void	*ft_calloc(size_t number, size_t size)
+static size_t	ft_strlen(const char *s)
 {
-	size_t	i;
-	char	*buffer;
+	unsigned int	i;
 
-	buffer = (char *)malloc(number * size);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*buffer;
+
+	buffer = (char *)malloc(ft_strlen(s), sizeof(char));
 	if (!buffer)
 	{
 		free(buffer);
 		return (NULL);
 	}
 	i = 0;
-	while (i < number)
+	while (s[i])
 	{
-		buffer[i] = '\0';
+		buffer[i] = (f)(i, s[i]);
 		i++;
 	}
-	return ((void *)buffer);
+	buffer[i] = '\0';
+	return (buffer);
 }
-
-// void *ft_calloc(size_t number, size_t size)
-// {
-//     void *buffer;
-
-//     if (number != 0 && size > SIZE_MAX / number)
-//         return (NULL);
-
-//     buffer = malloc(number * size);
-//     if (!buffer)
-//         return (NULL);
-
-//     ft_bzero(buffer, number * size);
-//     return (buffer);
-// }
