@@ -1,7 +1,9 @@
 #!/bin/sh
-loc=./$1
-dest=./$2
-if [ $loc ] && [ $dest ]; then
+
+if [ $1 ] && [ $2 ]; then
+    loc=./$1
+    dest=./$2
+
     find $loc -type f -iname "ft_*" -exec cp {} $dest \;
     find $loc -type f -iname "ft_*"
 else
