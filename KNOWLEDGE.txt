@@ -1,8 +1,0 @@
-SCII total        : 128 caractères
-Non imprimables    : 0 – 31 + 127
-Imprimables        : 32 – 126
-  ├─ espace        : 32
-  ├─ chiffres      : 48 – 57
-  ├─ majuscules    : 65 – 90
-  ├─ minuscules    : 97 – 122
-  └─ symboles      : 123 – 126
