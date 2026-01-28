@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:38:02 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/23 02:56:12 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/28 17:27:26 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strrchr(const char *s, int c)
 {
 	int	s_len;
 
+	if (!s)
+		return (NULL);
 	if (c == '\0')
 		return ((char *)&s[ft_strlen(s)]);
 	if (c > 256)

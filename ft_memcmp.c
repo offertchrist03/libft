@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:23:02 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/23 02:48:25 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/28 17:30:43 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (i < n)
 	{
 		if (!(buff_s1[i] == buff_s2[i]))
-			return ((int)buff_s1[i] - (int)buff_s2[i]);
+			return (buff_s1[i] - buff_s2[i]);
 		i++;
 	}
 	return (0);
