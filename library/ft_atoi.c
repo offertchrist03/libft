@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 08:59:04 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/23 04:34:01 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:51:40 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_atoi(const char *nptr)
 	}
 	while (nptr[i] && ft_isdigit(nptr[i]))
 	{
-		result = (result * 10) + ((const char)nptr[i] - '0');
+		result = (result * 10) + (nptr[i] - '0');
 		i++;
 	}
 	return (result * sign);

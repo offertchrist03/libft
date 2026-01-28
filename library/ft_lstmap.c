@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 12:51:56 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/27 10:29:31 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/28 08:39:18 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/28 10:36:01 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*buffer;
-	size_t	i;
-	size_t	buffer_len;
+	void	*new_content;
+	t_list	*new_list;
+	t_list	*new_node;
 
-	if (!s)
+	if (lst == NULL || !f || !del)
 		return (NULL);
-	buffer_len = ft_strlen(s);
-	if (start >= buffer_len)
-		return (ft_strdup(""));
-	if (len > buffer_len - start)
-		len = buffer_len - start;
-	buffer = (char *)malloc((len + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	i = 0;
-	while (i < len)
+	new_list = NULL;
+	while (lst)
 	{
-		buffer[i] = s[start + i];
-		i++;
+		new_content = f(lst->content);
+		new_node = ft_lstnew(new_content);
+		if (!new_node)
+		{
+			del(new_node->content);
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
 	}
-	buffer[i] = '\0';
-	return (buffer);
+	return (new_list);
 }

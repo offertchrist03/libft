@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 13:55:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/23 02:33:10 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/28 09:20:54 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*buffer_dest;
-	char	*buffer_src;
-	size_t	i;
+	unsigned char	*buffer_dest;
+	unsigned char	*buffer_src;
+	size_t			i;
 
-	buffer_dest = (char *)dest;
-	buffer_src = (char *)src;
+	buffer_dest = (unsigned char *)dest;
+	buffer_src = (unsigned char *)src;
 	if (buffer_src <= buffer_dest)
 	{
 		while (n > 0)

@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:27:20 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/22 22:57:25 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/28 09:19:05 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*buffer;
-	unsigned int	i;
+	size_t			i;
 
 	i = 0;
 	buffer = (unsigned char *)s;

@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:03:59 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/26 08:31:52 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/28 09:21:54 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*buffer;
-	unsigned int	str_len1;
-	unsigned int	str_len2;
+	char	*buffer;
+	size_t	str_len1;
+	size_t	str_len2;
 
 	if (!s1 || !s2)
 		return (NULL);

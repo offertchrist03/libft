@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/08 15:01:26 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/28 10:42:14 by mahendri         ###   ########.fr       */
+/*   Created: 2026/01/26 15:59:12 by mahendri          #+#    #+#             */
+/*   Updated: 2026/01/27 14:08:54 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isascii(unsigned char c)
+t_list	*ft_lstnew(void *content)
 {
-	int	n;
+	t_list	*new;
 
-	n = c;
-	if (n >= 0 && n <= 127)
-	{
-		return (1);
-	}
-	return (0);
+	if (!content)
+		return (NULL);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

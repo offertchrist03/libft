@@ -47,6 +47,20 @@ static size_t	word_len(char const *str, char sep)
 	return (i);
 }
 
+static char	**free_arr(char **buff_arr, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(buff_arr[i]);
+		i++;
+	}
+	free(buff_arr);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**buff_arr;
@@ -67,6 +81,8 @@ char	**ft_split(char const *s, char c)
 			i++;
 		temp_word_len = word_len(&s[i], c);
 		buff_arr[buff_arr_i] = ft_substr(&s[i], 0, temp_word_len);
+		if (!buff_arr[buff_arr_i])
+			return (free_arr(buff_arr, buff_arr_i));
 		i += temp_word_len;
 		buff_arr_i++;
 	}
