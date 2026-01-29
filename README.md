@@ -9,8 +9,13 @@ _This project has been created as part of the 42 curriculum by mahendri._
 The project is divided into three main parts:
 
 - **Part 1**: Recreation of standard libc functions (string manipulation, memory operations, character checks, etc.)
+  - [`ft_isalpha`](#ft_isalpha), [`ft_isdigit`](#ft_isdigit), [`ft_isalnum`](#ft_isalnum), [`ft_isascii`](#ft_isascii), [`ft_isprint`](#ft_isprint), [`ft_toupper`](#ft_toupper), [`ft_tolower`](#ft_tolower), [`ft_strlen`](#ft_strlen), [`ft_strchr`](#ft_strchr), [`ft_strrchr`](#ft_strrchr), [`ft_strncmp`](#ft_strncmp), [`ft_strnstr`](#ft_strnstr), [`ft_strlcpy`](#ft_strlcpy), [`ft_strlcat`](#ft_strlcat), [`ft_strdup`](#ft_strdup), [`ft_memset`](#ft_memset), [`ft_bzero`](#ft_bzero), [`ft_memcpy`](#ft_memcpy), [`ft_memmove`](#ft_memmove), [`ft_memchr`](#ft_memchr), [`ft_memcmp`](#ft_memcmp), [`ft_atoi`](#ft_atoi), [`ft_calloc`](#ft_calloc)
+
 - **Part 2**: Additional utility functions not present in the standard library
+  - [`ft_substr`](#ft_substr), [`ft_strjoin`](#ft_strjoin), [`ft_strtrim`](#ft_strtrim), [`ft_split`](#ft_split), [`ft_itoa`](#ft_itoa), [`ft_strmapi`](#ft_strmapi), [`ft_striteri`](#ft_striteri), [`ft_putchar_fd`](#ft_putchar_fd), [`ft_putstr_fd`](#ft_putstr_fd), [`ft_putendl_fd`](#ft_putendl_fd), [`ft_putnbr_fd`](#ft_putnbr_fd)
+
 - **Part 3**: Functions for linked list manipulation
+  - [`ft_lstnew`](#ft_lstnew), [`ft_lstadd_front`](#ft_lstadd_front), [`ft_lstadd_back`](#ft_lstadd_back), [`ft_lstsize`](#ft_lstsize), [`ft_lstlast`](#ft_lstlast), [`ft_lstdelone`](#ft_lstdelone), [`ft_lstclear`](#ft_lstclear), [`ft_lstiter`](#ft_lstiter), [`ft_lstmap`](#ft_lstmap)
 
 By completing this project, you develop a solid foundation in C programming, memory management, and algorithmic thinking.
 
@@ -192,15 +197,3 @@ typedef struct s_list
 - [**`ft_lstclear`**](#ft_lstclear) - Deletes and frees all elements of a list
 - [**`ft_lstiter`**](#ft_lstiter) - Applies a function to each element of a list
 - [**`ft_lstmap`**](#ft_lstmap) - Creates a new list by applying a function to each element
-
-## Author
-
-- **`mahendri`** - _42 Student_ - mahendri@student.42antananarivo.mg
-
-## License
-
-This project is part of the 42 curriculum and follows the school's policies regarding code sharing and academic integrity.
-
----
-
-_Created as part of the 42 Network curriculum - 2026_
