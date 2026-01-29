@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 09:33:45 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/26 15:47:21 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/29 11:34:41 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	buffer = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!buffer)
-	{
-		free(buffer);
 		return (NULL);
-	}
 	i = 0;
 	while (s[i])
 	{

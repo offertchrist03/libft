@@ -19,8 +19,7 @@ By completing this project, you develop a solid foundation in C programming, mem
 ### Prerequisites
 
 - CC compiler (recommanded)
-- Make utility
-- Unix-based operating system (Linux, macOS, or WSL on Windows)
+- Unix-based operating system
 
 ### Compilation
 
@@ -52,7 +51,7 @@ To use libft in your own C projects:
 2. Compile your program with the library:
 
 ```bash
-gcc -Wall -Wextra -Werror your_file.c libft.a -o your_program
+cc -Wall -Wextra -Werror your_file.c libft.a -o your_program
 ```
 
 ### Example Usage
@@ -91,8 +90,7 @@ int main(void)
 
 ### 42 Specific Resources
 
-- [42 Norminette](https://github.com/42School/norminette) - Code style checker for 42 projects
-- [libft-tester](https://github.com/Tripouille/libftTester) - Another popular testing framework
+- [libft-tester](https://github.com/Tripouille/libftTester) - Popular testing framework
 
 ### AI Usage in This Project
 
@@ -103,10 +101,6 @@ AI assistance was used in the following ways during this project:
 2. **Code Review and Debugging**: AI tools were consulted to identify potential edge cases and verify the correctness of function implementations, particularly for memory management and pointer operations.
 
 3. **Understanding Standard Library Behavior**: AI was used to clarify the exact behavior and return values of standard C library functions, especially for edge cases and error conditions.
-
-4. **Optimization Suggestions**: AI provided insights on code efficiency and best practices for C programming, though all final implementations were written and understood by the student.
-
-**Note**: All core function implementations were written by the student. AI was used as a learning aid and documentation tool, not for generating the actual library code.
 
 ## Library Description
 

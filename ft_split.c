@@ -61,18 +61,12 @@ static char	**free_arr(char **buff_arr, size_t size)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**do_split(char **buff_arr, size_t buff_len, char const *s, char c)
 {
-	char	**buff_arr;
-	size_t	buff_len;
 	size_t	buff_arr_i;
 	size_t	temp_word_len;
 	size_t	i;
 
-	buff_len = word_count(s, c);
-	buff_arr = (char **)malloc((buff_len + 1) * sizeof(char *));
-	if (!buff_arr)
-		return (NULL);
 	buff_arr_i = 0;
 	i = 0;
 	while (buff_arr_i < buff_len)
@@ -87,5 +81,20 @@ char	**ft_split(char const *s, char c)
 		buff_arr_i++;
 	}
 	buff_arr[buff_arr_i] = NULL;
+	return (buff_arr);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**buff_arr;
+	size_t	buff_len;
+
+	if (!s)
+		return (NULL);
+	buff_len = word_count(s, c);
+	buff_arr = (char **)malloc((buff_len + 1) * sizeof(char *));
+	if (!buff_arr)
+		return (NULL);
+	buff_arr = do_split(buff_arr, buff_len, s, c);
 	return (buff_arr);
 }

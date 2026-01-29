@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:28:49 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/28 17:09:33 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:21:19 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (i);
 	while (s[i])
 		i++;
 	return (i);
