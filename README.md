@@ -19,6 +19,10 @@ The project is divided into three main parts:
 
 By completing this project, you develop a solid foundation in C programming, memory management, and algorithmic thinking.
 
+## NB
+
+NB: Added explicit `NULL` checks to ensure safe handling of edge cases in the libft copies.
+
 ## Instructions
 
 ### Prerequisites
