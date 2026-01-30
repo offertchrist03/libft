@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:02:19 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/29 13:24:50 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/29 16:11:42 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*str;
 	size_t			i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	str = (unsigned char *)s;
 	while (i < n)

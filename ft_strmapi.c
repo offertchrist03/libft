@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 09:33:45 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/29 11:34:41 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/29 16:20:07 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	char			*buffer;
 
+	if (!s || !f)
+		return (NULL);
 	buffer = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 13:54:21 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/29 11:56:03 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 09:40:16 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	src_len;
 	size_t	i;
 
+	if (!dst || !src)
+		return (0);
 	src_len = ft_strlen(src);
 	dst_len = 0;
 	while (dst_len < size && dst[dst_len])

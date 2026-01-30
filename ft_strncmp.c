@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:31:19 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/28 17:31:00 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 09:43:33 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*buff_s2;
 	size_t			i;
 
+	if (!s1 && !s2)
+		return (0);
 	i = 0;
 	buff_s1 = (unsigned char *)s1;
 	buff_s2 = (unsigned char *)s2;

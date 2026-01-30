@@ -1,10 +1,10 @@
 _This project has been created as part of the 42 curriculum by mahendri._
 
-# libft
+# Libft
 
 ## Description
 
-**libft** is a custom implementation of standard C library functions, developed as the foundational project of the 42 curriculum. The goal of this project is to recreate commonly used functions from the C standard library (`libc`) from scratch, gaining a deep understanding of how these functions work at a low level. This library serves as a personal toolkit that can be reused in future 42 projects.
+**Libft** is a custom implementation of standard C library functions, developed as the foundational project of the 42 curriculum. The goal of this project is to recreate commonly used functions from the C standard library (`libc`) from scratch, gaining a deep understanding of how these functions work at a low level. This library serves as a personal toolkit that can be reused in future 42 projects.
 
 The project is divided into three main parts:
 
@@ -89,7 +89,6 @@ int main(void)
 
 ### C Programming Fundamentals
 
-- [The C Programming Language (K&R)](https://en.wikipedia.org/wiki/The_C_Programming_Language) - Classic C programming textbook
 - [C Memory Management](https://www.geeksforgeeks.org/dynamic-memory-allocation-in-c-using-malloc-calloc-free-and-realloc/) - Understanding malloc, free, and memory allocation
 - [Linked Lists in C](https://www.learn-c.org/en/Linked_lists) - Tutorial on linked list implementation
 

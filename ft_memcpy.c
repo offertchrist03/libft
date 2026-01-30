@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 13:12:57 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/28 09:20:14 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/29 16:22:30 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*buffer_dest;
 	unsigned char	*buffer_src;
 
+	if (!dest && !src)
+		return (NULL);
 	buffer_dest = (unsigned char *)dest;
 	buffer_src = (unsigned char *)src;
 	i = 0;
