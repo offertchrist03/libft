@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 10:23:06 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/29 16:12:37 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:03:04 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
+	if (!c)
+		return ;
 	write(fd, &c, 1);
 }

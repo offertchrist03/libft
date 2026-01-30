@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 14:57:57 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/22 22:56:21 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:02:10 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= '0' && c <= '9'))
+	if (ft_isalpha(c) || ft_isdigit(c))
 	{
 		return (1);
 	}

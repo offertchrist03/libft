@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 09:15:20 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/27 17:18:44 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:01:33 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	*ft_calloc(size_t number, size_t size)
 {
 	unsigned char	*buffer;
-	long int		num;
-	long int		s;
+	long long int	num;
+	long long int	s;
 
 	num = (long int)number;
 	s = (long int)size;

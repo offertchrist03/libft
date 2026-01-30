@@ -6,34 +6,47 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 22:26:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/30 09:56:19 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:10:53 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+char	*find_little(const char *big, const char *little, size_t len,
+		unsigned int i)
+{
+	unsigned int	j;
+
+	j = 0;
+	while (j < ft_strlen(little))
+	{
+		if (big[i + j] == little[j] && (i + j) < len)
+			j++;
+		else
+			break ;
+	}
+	if (j == ft_strlen(little))
+		return ((char *)&big[i]);
+	return (NULL);
+}
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	unsigned int	i;
-	unsigned int	j;
+	char			*res;
 
+	if (!big)
+		return ("");
 	i = 0;
 	if (little[i] == '\0' || !little)
 		return ((char *)big);
 	while (i < len && big[i])
 	{
-		j = 0;
-		if (big[i] == little[j])
+		if (big[i] == little[0])
 		{
-			while (j < ft_strlen(little))
-			{
-				if (big[i + j] == little[j] && (i + j) < len)
-					j++;
-				else
-					break ;
-			}
-			if (j == ft_strlen(little))
-				return ((char *)&big[i]);
+			res = find_little(big, little, len, i);
+			if (res)
+				return (res);
 		}
 		i++;
 	}
