@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 22:26:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/30 09:41:52 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/30 09:56:19 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	unsigned int	i;
 	unsigned int	j;
 
-	if (!big)
-		return ("");
 	i = 0;
 	if (little[i] == '\0' || !little)
 		return ((char *)big);
