@@ -6,13 +6,13 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 22:26:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/30 15:10:53 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:41:57 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*find_little(const char *big, const char *little, size_t len,
+static char	*find_little(const char *big, const char *little, size_t len,
 		unsigned int i)
 {
 	unsigned int	j;
