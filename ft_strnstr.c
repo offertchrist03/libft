@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 22:26:41 by mahendri          #+#    #+#             */
-/*   Updated: 2026/02/03 18:50:11 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:54:51 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	char			*res;
 
 	i = 0;
-	if (!little || little[i] == '\0')
+	if (little[i] == '\0')
 		return ((char *)big);
 	while (i < len && big[i])
 	{

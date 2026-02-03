@@ -6,7 +6,7 @@
 /*   By: mahendri <mahendri@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 22:25:05 by mahendri          #+#    #+#             */
-/*   Updated: 2026/01/29 12:45:40 by mahendri         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:59:47 by mahendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t number, size_t size);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
-int					ft_isascii(unsigned char c);
+int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 void				*ft_memchr(const void *s, int c, size_t n);
