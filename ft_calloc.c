@@ -21,7 +21,7 @@ void	*ft_calloc(size_t number, size_t size)
 	num = (long int)number;
 	s = (long int)size;
 	if ((s < 0 && num == 0) || (s == 0 && num < 0))
-		return (ft_strdup(""));
+		return (malloc(0));
 	if ((s < 0 || num < 0))
 		return (NULL);
 	buffer = (unsigned char *)malloc((num * s) * sizeof(unsigned char));

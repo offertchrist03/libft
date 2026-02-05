@@ -21,7 +21,7 @@ By completing this project, you develop a solid foundation in C programming, mem
 
 ## NB
 
-NB: Added explicit `NULL` checks to ensure safe handling of edge cases in the libft copies.
+NB: All functions such as ft_strlen have the same behavior as the original strlen, including causing a segmentation fault when passed NULL.
 
 ## Instructions
 
